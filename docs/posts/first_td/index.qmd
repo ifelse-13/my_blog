@@ -6,7 +6,7 @@ categories: [travaux dirigés]
 ---
 
 ```{r setup, include=FALSE, message=FALSE,warning=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE,message = FALSE)
 
 ```
 
@@ -158,7 +158,7 @@ donnees_distance <- rbind(donnees_distance,dddf)
 
 Q9 =donnees_distance |> 
   filter(dis==min(dis))
-view(Q9)
+print(Q9)
 ```
 
 Les deux sites les plus proches sont le Vélodrome national de Saint-Quentin-en-Yvelines et le Stade BMX de Saint-Quentin-en-Yvelines avec une distance de 89.30.
@@ -167,7 +167,7 @@ Les deux sites les plus proches sont le Vélodrome national de Saint-Quentin-en-
 
 ```{r}
 Q10 = donnees_distance |> filter(dis==max(dis))
-view(Q10)
+print(Q10)
 ```
 
 Les deux sites les plus éloignés en terme de distance sont le Stade Nautique et Colline d'Elancourt avec une distance de 49688.97.

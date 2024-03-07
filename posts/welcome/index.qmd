@@ -1,11 +1,11 @@
 ---
 title: "Welcome To My Blog"
-author: "Tristan O'Malley"
-date: "2024-03-04"
+author: "Niamiti TOUMAN "
+date: "Mars 2024"
 categories: [news]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+Bienvenue sur le blog de publication des ressources R.
 
 ![](thumbnail.jpg)
 

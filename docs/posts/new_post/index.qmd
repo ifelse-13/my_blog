@@ -1,9 +1,9 @@
 ---
-title: "Post Blog"
+title: "Package usage"
 author: "Niamiti Bethel TOUMAN"
 date: "Mars 2024"
-categories: [news, code, analysis]
-image: "image.jpg"
+categories: [package]
+image: "image_meteo.jpeg"
 ---
 
 ## Package olympicsWeather
