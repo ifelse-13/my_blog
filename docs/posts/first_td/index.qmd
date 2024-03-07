@@ -36,7 +36,7 @@ La base est constitué des variables qualitatives de type chaîne de caractères
 
 #### Question 3
 
-Combien y a t\'il de sites olympiques ?
+Combien y a t'il de sites olympiques ?
 
 ```{r}
 
@@ -50,7 +50,7 @@ Nous avons 26 sites Olympiques.
 
 #### Question 4
 
-Combien y a t\'il de sites paralympiques ?
+Combien y a t'il de sites paralympiques ?
 
 ```{r}
 table(grepl("Site paralympique",data_ex$sites_olympiques_paralympiques))
@@ -138,7 +138,7 @@ Les differents sites concernés sont le Stade de France, Hôtel de ville de Pari
 
 #### Question 9
 
-A vol d\'oiseau, quels sont les sites les deux sites les plus proches ?
+A vol d'oiseau, quels sont les sites les deux sites les plus proches ?
 
 ```{r}
 library(geosphere)
@@ -190,9 +190,7 @@ Les deux sites les plus éloignés en terme de distance sont le Stade Nautique e
 
 #### Question 11
 
-Vous êtes un heureux millionaire et souhaitez investir dans un bien immobilier. Vous
-décidez d\'acheter un appartement situé au barycentre de l\'ensemble des sites olympiques.
-Où se situe cet appartement ?
+Vous êtes un heureux millionaire et souhaitez investir dans un bien immobilier. Vous décidez d'acheter un appartement situé au barycentre de l'ensemble des sites olympiques. Où se situe cet appartement ?
 
 Le barycentre correspond au centre de tous les points des sites c'est à dire les latitudes et longitudes moyennes des sites de la base de données.
 
