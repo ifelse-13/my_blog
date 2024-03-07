@@ -1,0 +1,14 @@
+{
+  "hash": "a1b05f2d6a8420d99f4af91e59dbf851",
+  "result": {
+    "markdown": "---\ntitle: \"Post Blog\"\nauthor: \"Niamiti Bethel TOUMAN\"\ndate: \"Mars 2024\"\ncategories: [news, code, analysis]\nimage: \"image.jpg\"\n---\n\n\n##  Package olympicsWeather\n\nLe package olympicsWeater est une librairie developpée dans le cadre d\"un cours d'informatique de master 1 dans l'optique de faire des previsions meteorologiques pour les differents sites des jeux olympiques pour l\"Edition 2024 de Paris.\n\nLa librairie contient une fonction générique get_forecast qui permet de donner les differentes prévisions métérologiques pour 7 jours avec comme arguemnt fourni, la donnée de géolocalisation qui peut etre une addresse complete en format caractere ou des donnees de latitude et longitude.\n\nCette fonction permet de requeter une API en extrayant les dates, les températures en degré celsius, les température ressentie, les probabilités de précipitation et les précipitations en mm.\n\nL'installation du package se fait à l'aide de la fonction install_github de la librairie remotes. La syntaxe à suivre est la suivante:\n\n\n::: {.cell}\n\n```{.r .cell-code}\ninstall.packages(\"remotes\")  \nremotes::install_github(\"ifelse-13/olympicsWeather\")\nlibrary(olympicsWeather) \n# la ligne de code ci-dessous permet d'obtenir la doucmentation de la fonction get_forecast \n?get_forecast\n```\n:::\n\n\n## Les prévisions météo\n\nLa fonction get_forecast du package olympicsWeather sera utilisé pour les prévisions météorologiques pour les différentes sections ci-dessus.\n\n### Le stade de France\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmeteo_stade_de_france <-olympicsWeather::get_forecast(\"Stade de france\") \n```\n\n::: {.cell-output .cell-output-stderr}\n```\nPassing 1 address to the Nominatim single address geocoder\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\nQuery completed in: 1 seconds\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\nWarning: `as.tibble()` was deprecated in tibble 2.0.0.\nℹ Please use `as_tibble()` instead.\nℹ The signature and semantics have changed, see `?as_tibble`.\nℹ The deprecated feature was likely used in the olympicsWeather package.\n  Please report the issue to the authors.\n```\n:::\n:::\n\n\n### Tahiti\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmeteo_tahiti <-olympicsWeather::get_forecast(\"Tahiti\")\n```\n\n::: {.cell-output .cell-output-stderr}\n```\nPassing 1 address to the Nominatim single address geocoder\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\nQuery completed in: 1 seconds\n```\n:::\n:::\n\n\n### Coordonnées GPS 43.276703, 5.334791\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmeteo_gps <-olympicsWeather::get_forecast(c(43.276703,5.334791))\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

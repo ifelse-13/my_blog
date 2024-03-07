@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post Blog",
+    "section": "",
+    "text": "Le package olympicsWeater est une librairie developpée dans le cadre d”un cours d’informatique de master 1 dans l’optique de faire des previsions meteorologiques pour les differents sites des jeux olympiques pour l”Edition 2024 de Paris.\nLa librairie contient une fonction générique get_forecast qui permet de donner les differentes prévisions métérologiques pour 7 jours avec comme arguemnt fourni, la donnée de géolocalisation qui peut etre une addresse complete en format caractere ou des donnees de latitude et longitude.\nCette fonction permet de requeter une API en extrayant les dates, les températures en degré celsius, les température ressentie, les probabilités de précipitation et les précipitations en mm.\nL’installation du package se fait à l’aide de la fonction install_github de la librairie remotes. La syntaxe à suivre est la suivante:\n\ninstall.packages(\"remotes\")  \nremotes::install_github(\"ifelse-13/olympicsWeather\")\nlibrary(olympicsWeather) \n# la ligne de code ci-dessous permet d'obtenir la doucmentation de la fonction get_forecast \n?get_forecast"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#package-olympicsweather",
+    "href": "posts/post-with-code/index.html#package-olympicsweather",
+    "title": "Post Blog",
+    "section": "",
+    "text": "Le package olympicsWeater est une librairie developpée dans le cadre d”un cours d’informatique de master 1 dans l’optique de faire des previsions meteorologiques pour les differents sites des jeux olympiques pour l”Edition 2024 de Paris.\nLa librairie contient une fonction générique get_forecast qui permet de donner les differentes prévisions métérologiques pour 7 jours avec comme arguemnt fourni, la donnée de géolocalisation qui peut etre une addresse complete en format caractere ou des donnees de latitude et longitude.\nCette fonction permet de requeter une API en extrayant les dates, les températures en degré celsius, les température ressentie, les probabilités de précipitation et les précipitations en mm.\nL’installation du package se fait à l’aide de la fonction install_github de la librairie remotes. La syntaxe à suivre est la suivante:\n\ninstall.packages(\"remotes\")  \nremotes::install_github(\"ifelse-13/olympicsWeather\")\nlibrary(olympicsWeather) \n# la ligne de code ci-dessous permet d'obtenir la doucmentation de la fonction get_forecast \n?get_forecast"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html#les-prévisions-météo",
+    "href": "posts/post-with-code/index.html#les-prévisions-météo",
+    "title": "Post Blog",
+    "section": "Les prévisions météo",
+    "text": "Les prévisions météo\nLa fonction get_forecast du package olympicsWeather sera utilisé pour les prévisions météorologiques pour les différentes sections ci-dessus.\n\nLe stade de France\n\nmeteo_stade_de_france &lt;-olympicsWeather::get_forecast(\"Stade de france\") \n\nPassing 1 address to the Nominatim single address geocoder\n\n\nQuery completed in: 1 seconds\n\n\nWarning: `as.tibble()` was deprecated in tibble 2.0.0.\nℹ Please use `as_tibble()` instead.\nℹ The signature and semantics have changed, see `?as_tibble`.\nℹ The deprecated feature was likely used in the olympicsWeather package.\n  Please report the issue to the authors.\n\n\n\n\nTahiti\n\nmeteo_tahiti &lt;-olympicsWeather::get_forecast(\"Tahiti\")\n\nPassing 1 address to the Nominatim single address geocoder\n\n\nQuery completed in: 1 seconds\n\n\n\n\nCoordonnées GPS 43.276703, 5.334791\n\nmeteo_gps &lt;-olympicsWeather::get_forecast(c(43.276703,5.334791))"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "my_blog",
+    "section": "",
+    "text": "Welcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nMar 4, 2024\n\n\nTristan O’Malley\n\n\n\n\n\n\n  \n\n\n\n\nPost Blog\n\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\n\n\nMar 1, 2024\n\n\nNiamiti Bethel TOUMAN\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
+    "section": "",
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  }
+]
