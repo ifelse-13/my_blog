@@ -6,7 +6,7 @@ categories: [news, code, analysis]
 image: "image.jpg"
 ---
 
-##  Package olympicsWeather
+## Package olympicsWeather
 
 Le package olympicsWeater est une librairie developpée dans le cadre d"un cours d'informatique de master 1 dans l'optique de faire des previsions meteorologiques pour les differents sites des jeux olympiques pour l"Edition 2024 de Paris.
 
@@ -30,18 +30,21 @@ La fonction get_forecast du package olympicsWeather sera utilisé pour les prév
 
 ### Le stade de France
 
-```{r}
+```{r warning=FALSE}
 meteo_stade_de_france <-olympicsWeather::get_forecast("Stade de france") 
+veiw(meteo_stade_de_france)
 ```
 
 ### Tahiti
 
-```{r}
+```{r warning=FALSE}
 meteo_tahiti <-olympicsWeather::get_forecast("Tahiti")
+View(meteo_tahiti)
 ```
 
 ### Coordonnées GPS 43.276703, 5.334791
 
-```{r}
+```{r warning=FALSE}
 meteo_gps <-olympicsWeather::get_forecast(c(43.276703,5.334791))
+view(meteo_gps)
 ```
