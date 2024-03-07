@@ -3,7 +3,6 @@ title: "Package usage"
 author: "Niamiti Bethel TOUMAN"
 date: "Mars 2024"
 categories: [package]
-image: "image_meteo.jpeg"
 ---
 
 ## Package olympicsWeather
