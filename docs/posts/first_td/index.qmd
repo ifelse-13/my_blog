@@ -1,0 +1,193 @@
+---
+title: "TD1"
+author: "Niamiti Bethel TOUMAN"
+date: "Mars 2024"
+categories: [travaux dirigés]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+Importation des librairies
+
+```{r}
+library(tidyverse)
+```
+
+L'importation de la base de données se fait par un read.csv2
+
+```{r}
+data_ex=read.csv2("paris-2024-sites-olympiques-et-paralympiques-franciliens (1).csv")
+
+```
+
+Visualisation de la base et des caracteristiques
+
+```{r}
+data_ex
+str(data_ex)
+summary(data_ex)
+
+```
+
+La base est constitué des variables qualitatives de type chaîne de caractères.
+
+#### Question 3
+
+```{r}
+
+data_ex |> 
+  count(sites_olympiques_paralympiques)
+
+table(grepl("Site olympique",data_ex$sites_olympiques_paralympiques))
+```
+
+Nous avons 26 sites Olympiques.
+
+#### Question 4
+
+```{r}
+table(grepl("Site paralympique",data_ex$sites_olympiques_paralympiques))
+```
+
+Nous avons ici 19 sites paralympiques.
+
+#### Question 5
+
+```{r}
+  data_ex<-data_ex |> 
+    mutate(many_sports=sapply(strsplit(data_ex$sports, ","), length)
+    )
+  plus_de_sport<-data_ex |> 
+  filter(many_sports>1)
+dim(plus_de_sport)
+
+```
+
+Nous avons 19 sites qui accueillent plusieurs disciplines sportives.
+
+#### Question 6
+
+```{r}
+donnees = as.tibble(data_ex)
+
+sites_paralympiques <- donnees |> 
+  filter(str_detect(sites_olympiques_paralympiques, "Site paralympique"))
+
+disciplines_paralympiques <- sites_paralympiques |> 
+  pull(sports) |> 
+  strsplit(",") |> 
+  unlist() |> 
+  trimws()
+print(disciplines_paralympiques)
+
+disciplines_para <- str_subset(disciplines_paralympiques, "^Para")
+
+# les différentes disciplines sont les suivantes:
+print(unique(disciplines_para))
+
+```
+
+#### Question 7
+
+```{r}
+plus_de_sport |> 
+  arrange(desc(many_sports)) |> select(nom) |> head(8)
+```
+
+Les sites qui accueillent le plus de disciplines différentes sont: Arena Bercy, Arena Paris nord, Stade de la Concorde, Arena Champs de Mars, Stade nautique, Arena La Chapelle, Grand Palais, Invalides.
+
+#### Question 8
+
+```{r}
+disciplines_sites <- donnees |> 
+  separate_rows(sports, sep = ",")
+
+occurrences_disciplines <- disciplines_sites |> 
+  group_by(sports) |> 
+  summarise(occurrences = n())
+
+discipline_max_occurrences <- occurrences_disciplines |> 
+  filter(occurrences == max(occurrences))
+
+print(discipline_max_occurrences)
+sites_discipline_max_occurrences <- disciplines_sites |> 
+  filter(sports == discipline_max_occurrences$sports) |> 
+  left_join(donnees, by = c("geo_point", "nom", "sites_olympiques_paralympiques", "sports"))
+
+sites_discipline_max_occurrences |> select(nom)
+```
+
+La discipline qui aura lieu sur le plus grands nombre de sites est l'Athlétisme.
+
+Les differents sites concernés sont le Stade de France, Hôtel de ville de Paris, Pont d'Iéna et Invalides.
+
+#### Question 9
+
+```{r}
+library(geosphere)
+donnees <- donnees |> 
+  separate(geo_point, into = c("latitude", "longitude"), sep = ",") |> 
+  mutate(across(c(latitude, longitude), as.numeric))
+
+df <- as.data.frame(donnees)
+n <- nrow(df)
+
+donnees_distance <- data.frame()
+
+for (i in 1:(n - 1)) {
+  for (j in (i + 1): n) {
+    distance <- distHaversine(
+      c(df[i, "longitude"], df[i, "latitude"]),
+      c(df[j, "longitude"], df[j, "latitude"])
+    )
+dddf <- data.frame(
+  site_1=df[i,"nom"],
+  site_2=df[j,"nom"],
+  lon_1=df[i, "longitude"],
+  lat_1=df[i, "latitude"],
+  lon_2=df[j, "longitude"],
+  lat_2=df[j, "latitude"],
+  dis=distance
+)
+donnees_distance <- rbind(donnees_distance,dddf)
+  }
+}
+
+Q9 =donnees_distance |> 
+  filter(dis==min(dis))
+view(Q9)
+```
+
+Les deux sites les plus proches sont le Vélodrome national de Saint-Quentin-en-Yvelines et le Stade BMX de Saint-Quentin-en-Yvelines avec une distance de 89.30.
+
+#### Question 10
+
+```{r}
+Q10 = donnees_distance |> filter(dis==max(dis))
+view(Q10)
+```
+
+Les deux sites les plus éloignés en terme de distance sont le Stade Nautique et Colline d'Elancourt avec une distance de 49688.97.
+
+#### Question 11
+
+Le barycentre correspond au centre de tous les points des sites c'est à dire les latitudes et longitudes moyennes des sites de la base de données.
+
+```{r}
+barycentre <- df |> 
+  summarise(
+    latitude = mean(latitude),
+    longitude = mean(longitude)
+  )
+
+library(tidygeocoder)
+
+barycentre |> 
+  reverse_geocode(lat = latitude,long = longitude)
+
+```
+
+L'addresse correspondante est 23 Avenue Pierre 1er de Serbie, Quartier de Chaillot, Paris 16e Arrondissement, Paris.
