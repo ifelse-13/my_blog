@@ -5,7 +5,7 @@ date: "Mars 2024"
 categories: [travaux dirigés]
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, message=FALSE,warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
