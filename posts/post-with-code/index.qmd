@@ -5,3 +5,43 @@ date: "Mars 2024"
 categories: [news, code, analysis]
 image: "image.jpg"
 ---
+
+##  Package olympicsWeather
+
+Le package olympicsWeater est une librairie developpée dans le cadre d"un cours d'informatique de master 1 dans l'optique de faire des previsions meteorologiques pour les differents sites des jeux olympiques pour l"Edition 2024 de Paris.
+
+La librairie contient une fonction générique get_forecast qui permet de donner les differentes prévisions métérologiques pour 7 jours avec comme arguemnt fourni, la donnée de géolocalisation qui peut etre une addresse complete en format caractere ou des donnees de latitude et longitude.
+
+Cette fonction permet de requeter une API en extrayant les dates, les températures en degré celsius, les température ressentie, les probabilités de précipitation et les précipitations en mm.
+
+L'installation du package se fait à l'aide de la fonction install_github de la librairie remotes. La syntaxe à suivre est la suivante:
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+install.packages("remotes")  
+remotes::install_github("ifelse-13/olympicsWeather")
+library(olympicsWeather) 
+# la ligne de code ci-dessous permet d'obtenir la doucmentation de la fonction get_forecast 
+?get_forecast
+```
+
+## Les prévisions météo
+
+La fonction get_forecast du package olympicsWeather sera utilisé pour les prévisions météorologiques pour les différentes sections ci-dessus.
+
+### Le stade de France
+
+```{r}
+meteo_stade_de_france <-olympicsWeather::get_forecast("Stade de france") 
+```
+
+### Tahiti
+
+```{r}
+meteo_tahiti <-olympicsWeather::get_forecast("Tahiti")
+```
+
+### Coordonnées GPS 43.276703, 5.334791
+
+```{r}
+meteo_gps <-olympicsWeather::get_forecast(c(43.276703,5.334791))
+```
