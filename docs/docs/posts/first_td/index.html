@@ -309,6 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>La base est constitué des variables qualitatives de type chaîne de caractères.</p>
 <section id="question-3" class="level4">
 <h4 class="anchored" data-anchor-id="question-3">Question 3</h4>
+<p>Combien y a t'il de sites olympiques ?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data_ex <span class="sc">|&gt;</span> </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sites_olympiques_paralympiques)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -330,6 +331,7 @@ FALSE  TRUE
 </section>
 <section id="question-4" class="level4">
 <h4 class="anchored" data-anchor-id="question-4">Question 4</h4>
+<p>Combien y a t'il de sites paralympiques ?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">grepl</span>(<span class="st">"Site paralympique"</span>,data_ex<span class="sc">$</span>sites_olympiques_paralympiques))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -342,6 +344,7 @@ FALSE  TRUE
 </section>
 <section id="question-5" class="level4">
 <h4 class="anchored" data-anchor-id="question-5">Question 5</h4>
+<p>Quels sont les sites qui accueillent plusieurs disciplines sportives ?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>  data_ex<span class="ot">&lt;-</span>data_ex <span class="sc">|&gt;</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">many_sports=</span><span class="fu">sapply</span>(<span class="fu">strsplit</span>(data_ex<span class="sc">$</span>sports, <span class="st">","</span>), length)</span>
@@ -357,6 +360,7 @@ FALSE  TRUE
 </section>
 <section id="question-6" class="level4">
 <h4 class="anchored" data-anchor-id="question-6">Question 6</h4>
+<p>Quels sont les disciplines para-olympiques accueillies dans ces sites franciliens ?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>donnees <span class="ot">=</span> <span class="fu">as.tibble</span>(data_ex)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -415,6 +419,7 @@ FALSE  TRUE
 </section>
 <section id="question-7" class="level4">
 <h4 class="anchored" data-anchor-id="question-7">Question 7</h4>
+<p>Quel(s) site(s) accueille(nt) le plus de disciplines différentes ?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plus_de_sport <span class="sc">|&gt;</span> </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(many_sports)) <span class="sc">|&gt;</span> <span class="fu">select</span>(nom) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -434,6 +439,7 @@ FALSE  TRUE
 </section>
 <section id="question-8" class="level4">
 <h4 class="anchored" data-anchor-id="question-8">Question 8</h4>
+<p>Quel discipline aura lieu sur le plus grand nombre de sites ? Quels sont ces sites ?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>disciplines_sites <span class="ot">&lt;-</span> donnees <span class="sc">|&gt;</span> </span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_rows</span>(sports, <span class="at">sep =</span> <span class="st">","</span>)</span>
@@ -472,6 +478,7 @@ FALSE  TRUE
 </section>
 <section id="question-9" class="level4">
 <h4 class="anchored" data-anchor-id="question-9">Question 9</h4>
+<p>A vol d'oiseau, quels sont les sites les deux sites les plus proches ?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geosphere)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>donnees <span class="ot">&lt;-</span> donnees <span class="sc">|&gt;</span> </span>
@@ -518,6 +525,7 @@ FALSE  TRUE
 </section>
 <section id="question-10" class="level4">
 <h4 class="anchored" data-anchor-id="question-10">Question 10</h4>
+<p>Quels sont les deux sites les plus éloignés ?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Q10 <span class="ot">=</span> donnees_distance <span class="sc">|&gt;</span> <span class="fu">filter</span>(dis<span class="sc">==</span><span class="fu">max</span>(dis))</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Q10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -532,6 +540,7 @@ FALSE  TRUE
 </section>
 <section id="question-11" class="level4">
 <h4 class="anchored" data-anchor-id="question-11">Question 11</h4>
+<p>Vous êtes un heureux millionaire et souhaitez investir dans un bien immobilier. Vous décidez d'acheter un appartement situé au barycentre de l'ensemble des sites olympiques. Où se situe cet appartement ?</p>
 <p>Le barycentre correspond au centre de tous les points des sites c’est à dire les latitudes et longitudes moyennes des sites de la base de données.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>barycentre <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
