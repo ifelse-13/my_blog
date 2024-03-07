@@ -1,0 +1,7 @@
+---
+title: "Post Blog"
+author: "Niamiti Bethel TOUMAN"
+date: "Mars 2024"
+categories: [news, code, analysis]
+image: "image.jpg"
+---
