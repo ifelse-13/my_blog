@@ -3,6 +3,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/post-with-code/pack.html",
+      "/posts/post-with-code/quarto3.html",
       "/posts/post-with-code/TD1.html",
       "/posts/welcome/index.html"
     ]

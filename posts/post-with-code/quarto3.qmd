@@ -1,0 +1,170 @@
+---
+title: "TD3"
+author: "Niamiti Bethel TOUMAN"
+date: "Mars 2024"
+categories: [travaux dirigés]
+---
+
+
+```{r setup, include=FALSE, message=FALSE,warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE,message = FALSE)
+
+```
+
+##IMPORARTION DES LIBRAIRIES
+
+install.packages(c("stringr", "lubridate", "arrow", "dplyr", "tidyr", "jsonlite", "RSQLite"))
+
+```{r}
+library(stringr)
+library(lubridate)
+library(arrow)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+library(jsonlite)
+library(RSQLite)
+
+```
+
+## Import et lecture des données
+
+#### Question 1
+
+```{r}
+list.files("data/")
+
+```
+
+Les différents fichiers présents dans le dossier data sont "data.sqlite", "olympics_athletes.json", "tokyo_athletes.parquet" qui sont respectivement aux formats "sqlite", "json" et "parquet".
+
+#### Question 2
+
+```{r}
+data_parquet <- arrow::read_parquet("data/tokyo_athletes.parquet")
+dim(data_parquet)
+colnames(data_parquet)
+```
+
+La lecture du fichier se fait avec la fonction read_parquet du package arrow et nous avons 11 085 lignes et 3 colonnes dans la base. La base "data_parquet" est composée des colonnes "Name", "NOC", "Discipline".
+
+#### Question 3
+
+```{r}
+data_json <- jsonlite::read_json("data/olympics_athletes.json",simplifyVector = TRUE)
+dim(data_json)
+colnames(data_json)
+# l'argument "simplifyVector=TRUE" permet de retourner un data frame
+
+
+```
+
+La base de données comprend 13 colonnes et 269 731 lignes. Les colonnes représentent des variables. Les differentes variables de la base sont "ID", "Name", "Sex", "Age", "Height", "Weight", "Team", "NOC", "Games", "City", "Sport", "Event", "Medal".
+
+#### Question 4
+
+```{r}
+
+
+connection <-dbConnect(RSQLite::SQLite(),dbname="data/data.sqlite")
+dbListTables(connection)
+```
+
+Les differentes tables présentes dans la base de données sont "tokyo_medals" et "tokyo_teams".
+
+#### Question 5
+
+```{r}
+
+dbWriteTable(connection,"tokyo_athletes",data_parquet)
+
+dbWriteTable(conn = connection,name = "olympics_athletes", value = data_json)
+dbListTables(connection)
+```
+
+#### Question 6
+
+```{r}
+dbListFields(conn = connection,name = "olympics_athletes")
+```
+
+La table "olympics_athletes" comprend les colonnes suivantes: "ID", "Name", "Sex", "Age", "Height", "Weight", "Team", "NOC", "Games", "City", "Sport", "Event", "Medal".
+
+#### Question 7
+
+```{r}
+base_oly_ath <- dbReadTable(conn = connection,name = "olympics_athletes") |> as.tibble()
+class(base_oly_ath)
+```
+
+## dplyr, tidyr
+
+#### Question 8
+
+```{r}
+base_oly_ath |> 
+  mutate(
+    Sex=factor(Sex)
+  )
+
+
+```
+
+#### Question 9
+
+```{r}
+base_oly_ath <- base_oly_ath |> separate_wider_delim(
+  Games,delim = " ",names = c("Year","isSummer")
+)
+base_oly_ath <- base_oly_ath |> 
+  mutate(
+    Year = as.integer(Year),
+    isSummer = case_when(
+      isSummer=="Summer"~"Yes",
+      TRUE~"No"
+    )
+  )
+base_oly_ath$isSummer=factor(base_oly_ath$isSummer)
+```
+
+#### Question 10
+
+```{r}
+moyenne <- base_oly_ath |> filter(isSummer=="Yes") |> 
+  group_by(Year) |> summarise(
+    moyenne_age = mean(Age,na.rm = TRUE)
+  ) 
+moyenne|> filter(moyenne_age==min(moyenne_age))
+moyenne |> filter(moyenne_age==max(moyenne_age))
+```
+
+L'édition ayant compté les athlètes les plus jeunes est celle de 1896 avec un âge moyen de 23.6 ans tandis que l'édition qui a compté les athlètes les plus vieux est celle de 1932 avec 30.2 ans comme moyenne d'âge.
+
+#### Question 11
+
+```{r}
+
+#
+base_oly_ath |>filter(isSummer=="Yes") |> 
+  filter(Sex=="F") |>
+  filter(Height==max(Height,na.rm = TRUE)) #|> pull(Sport)
+#
+base_oly_ath |>filter(isSummer=="Yes") |> 
+  filter(Sex=="F") |> group_by(Year) |> 
+  filter(Height==max(Height,na.rm = TRUE)) |> select(Year, Sport) |>
+  arrange(Year) |> print(n=50)
+```
+
+QUESTION 11 à terminer
+
+## stringr, lubridate
+
+#### Question 12
+
+```{r}
+texte <-"Les jeux olympiques d’été se déroulent normalement tous les 4 ans, durant les mois
+ de Juillet et Août. Les jeux de Rio ont eu lieu du 5 Août 2016 au 20 Août 2016,
+ ceux de Tokyo du 23 Juillet 2021 au 8 Août 2021, et ceux de Paris auront lieu du
+ 26 Juillet 2024 au 11 Août 2024. Plus de 10000 athlètes sont attendus du monde
+ entier à Paris."
+```
