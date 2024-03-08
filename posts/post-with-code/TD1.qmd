@@ -26,7 +26,7 @@ data_ex=read.csv2("paris-2024-sites-olympiques-et-paralympiques-franciliens (1).
 Visualisation de la base et des caracteristiques
 
 ```{r}
-data_ex |> print(n=10)
+head(data_ex)
 str(data_ex)
 summary(data_ex)
 
