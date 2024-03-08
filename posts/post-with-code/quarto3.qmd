@@ -79,7 +79,7 @@ Les differentes tables présentes dans la base de données sont "tokyo_medals" e
 
 #### Question 5
 
-Créez deux nouvelles tables dans la base de données à l\'aide de la fonction dbWriteTable. Les tables s\'appeleront respectivement olympics_athletes et tokyo_athletes pour les fichiers olympics_athletes.json et tokyo_athletes.parquet.
+Créez deux nouvelles tables dans la base de données à l'aide de la fonction dbWriteTable. Les tables s'appeleront respectivement olympics_athletes et tokyo_athletes pour les fichiers olympics_athletes.json et tokyo_athletes.parquet.
 
 ```{r}
 
@@ -125,7 +125,7 @@ base_oly_ath |>
 
 #### Question 9
 
-Créez deux colonnes à partir de la colonne Games. La première colonne Year sera une colonne de type integer contenant l\'année des jeux. La deuxième colonne isSummer sera une colonne booléenne qui indiquera si les jeux sont des jeux d\'été ou d\'hiver. Vous pourrez utiliser la fonction separate_wider_delim de tidyr notamment.
+Créez deux colonnes à partir de la colonne Games. La première colonne Year sera une colonne de type integer contenant l'année des jeux. La deuxième colonne isSummer sera une colonne booléenne qui indiquera si les jeux sont des jeux d'été ou d'hiver. Vous pourrez utiliser la fonction separate_wider_delim de tidyr notamment.
 
 ```{r}
 base_oly_ath <- base_oly_ath |> separate_wider_delim(
@@ -144,7 +144,7 @@ base_oly_ath$isSummer=factor(base_oly_ath$isSummer)
 
 #### Question 10
 
-Calculez la moyenne d\'age des athletes pour chacune des éditions des JO d\'été. Quelle édition a compté les athlètes les plus jeunes ? Les plus vieux ?
+Calculez la moyenne d'age des athletes pour chacune des éditions des JO d'été. Quelle édition a compté les athlètes les plus jeunes ? Les plus vieux ?
 
 ```{r}
 moyenne <- base_oly_ath |> filter(isSummer=="Yes") |> 
@@ -159,7 +159,7 @@ L'édition ayant compté les athlètes les plus jeunes est celle de 1896 avec un
 
 #### Question 11
 
-Quelle est la discipline des JO d\'été dont la taille des athlètes féminines est la plus grande ? Quelle a été cette discipline au cours de chacune des éditions ? Calculez le nombre de fois où chaque discipline a été la discipline avec les plus grandes athlètes.
+Quelle est la discipline des JO d'été dont la taille des athlètes féminines est la plus grande ? Quelle a été cette discipline au cours de chacune des éditions ? Calculez le nombre de fois où chaque discipline a été la discipline avec les plus grandes athlètes.
 
 ```{r}
 
@@ -176,12 +176,81 @@ base_oly_ath |>filter(isSummer=="Yes") |>
 
 ## stringr, lubridate
 
-#### Question 12
-
 ```{r}
 texte <-c("Les jeux olympiques d’été se déroulent normalement tous les 4 ans, durant les mois
  de Juillet et Août. Les jeux de Rio ont eu lieu du 5 Août 2016 au 20 Août 2016,
  ceux de Tokyo du 23 Juillet 2021 au 8 Août 2021, et ceux de Paris auront lieu du
  26 Juillet 2024 au 11 Août 2024. Plus de 10000 athlètes sont attendus du monde
  entier à Paris.")
+```
+
+#### Question 12
+
+En utilisant les fonctions du packages stringr, extrayez les dates des différentes éditions des JO. Aide : définissez une expression régulière capable de capturer une séquence de caractères représentant une date telle que "26 Juillet 2024". Vous pourrez utiliser cette regex avec la fonction str_extract_all par exemple.
+
+```{r}
+pattern <- "\\b\\d{1,2} [A-Za-zéû]+ \\d{4}\\b"
+les_dates <- str_extract_all(texte, pattern)[[1]]
+```
+
+#### Question 13
+
+Remplacez les noms des mois par leur numéro pour rendre ces éléments convertibles en date en utilisant la fonction str_replace.
+
+```{r}
+mois_numero <- function(mois) {
+  mois <- tolower(mois)  
+  mois_num <- switch(mois,
+                     "janvier" = "01",
+                     "février" = "02",
+                     "mars" = "03",
+                     "avril" = "04",
+                     "mai" = "05",
+                     "juin" = "06",
+                     "juillet" = "07",
+                     "août" = "08",
+                     "septembre" = "09",
+                     "octobre" = "10",
+                     "novembre" = "11",
+                     "décembre" = "12")  
+  return(mois_num)
+}
+dates_numerique <- str_replace_all(les_dates, "\\b[A-Za-zéû]+\\b", mois_numero)
+```
+
+#### Question 14
+
+Convertissez ces 3 éléments en date en utilisant la fonction appropriée du package lubridate.
+
+```{r}
+dates_num_en_date <- dmy(dates_numerique)
+class(dates_num_en_date)
+dates_num_en_date
+```
+
+#### Question 15
+
+Combien de jours ont séparés les éditions de Rio et Tokyo ? Et sépareront les éditions de Tokyo et de Paris ? Faites le même calcul en semaines.
+
+```{r}
+# rio: 5 Août 2016 au 20 Août 2016 et tokyo:23 Juillet 2021 au 8 Août 2021
+# paris: 26 Juillet 2024
+rio_debut <-dmy("5 Août 2016")
+rio_fin <- dmy("20 Août 2016")
+tokyo_debut <- dmy("23 Juillet 2021")
+tokyo_fin <-dmy("8 Août 2021")
+paris_debut <-dmy("26 Juillet 2024")
+# ecart 
+# rio tokyo
+difftime(tokyo_debut,rio_fin,units = c("days"))
+# tokyo paris
+difftime(paris_debut,tokyo_fin,units = c("days"))
+
+#en semaines
+# rio tokyo
+difftime(tokyo_debut,rio_fin,units = c("weeks"))
+# tokyo paris
+difftime(paris_debut,tokyo_fin,units = c("weeks"))
+
+
 ```

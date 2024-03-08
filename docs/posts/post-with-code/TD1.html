@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Visualisation de la base et des caracteristiques</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_ex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_ex <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             geo_point                                             nom
 1  48.841319, 2.253076                                Parc des Princes
@@ -200,27 +200,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 8  48.856858, 2.351415                         Hôtel de ville de Paris
 9    48.856262, 2.2914                                     Pont d'Iéna
 10 48.838649, 2.378496                                     Arena Bercy
-11 48.971314, 2.519183                                Arena Paris nord
-12 48.829624, 2.290777         Arena Paris Sud 6 (Porte de Versailles)
-13 48.865589, 2.321205                            Stade de la Concorde
-14 48.930873, 2.249836                            Stade Yves du Manoir
-15 48.854536, 2.300413                            Arena Champs de Mars
-16   48.89566, 2.22971                                La Défense Arena
-17 48.862229, 2.636374                                  Stade nautique
-18 48.832068, 2.284126         Arena Paris Sud 1 (Porte de Versailles)
-19 48.857232, 2.296084                               Stade Tour Eiffel
-20 48.787261, 2.034736          Stade BMX de Saint-Quentin-en-Yvelines
-21 48.899483, 2.361803                               Arena La Chapelle
-22 48.835157, 2.257363                       Stade Pierre de Coubertin
-23 48.923457, 2.355527                                Centre aquatique
-24  48.92467, 2.332428                               Village olympique
-25  48.815115, 2.08208                           Château de Versailles
-26 48.944207, 2.424716                              Village des médias
-27 48.944643, 2.408258             Terrain des Essences - La Courneuve
-28 48.788162, 1.967776                             Colline d'Elancourt
-29 48.866041, 2.312406                                    Grand Palais
-30 48.862286, 2.313222                                       Invalides
-31 48.937188, 2.420467                      Site d'escalade du Bourget
      sites_olympiques_paralympiques
 1                    Site olympique
 2  Site olympique,Site paralympique
@@ -232,59 +211,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 8                    Site olympique
 9                    Site olympique
 10 Site olympique,Site paralympique
-11 Site olympique,Site paralympique
-12 Site olympique,Site paralympique
-13                   Site olympique
-14                   Site olympique
-15 Site olympique,Site paralympique
-16 Site olympique,Site paralympique
-17 Site olympique,Site paralympique
-18 Site olympique,Site paralympique
-19 Site olympique,Site paralympique
-20                   Site olympique
-21 Site olympique,Site paralympique
-22                Site paralympique
-23                   Site olympique
-24                                 
-25 Site olympique,Site paralympique
-26                                 
-27                Site paralympique
-28                   Site olympique
-29 Site olympique,Site paralympique
-30 Site olympique,Site paralympique
-31                   Site olympique
-                                                             sports
-1                                                          Football
-2                                  Athlétisme,Para athlétisme,Rugby
-3                                                              Golf
-4                        Cyclisme sur piste,Para cyclisme sur piste
-5                                       Tennis,Tennis fauteuil,Boxe
-6                                           Para cyclisme sur route
-7                              Tennis de table,Para tennis de table
-8                                                        Athlétisme
-9                                     Cyclisme sur route,Athlétisme
-10     Basketball,Basket fauteuil,Gymnastique artistique,trampoline
-11                Boxe,Escrime,Pentathlon moderne,Volley-ball assis
-12                                  Haltérophilie,Handball,Goalball
-13                 Basketball 3x3,BMX freestyle,Breaking,Skateboard
-14                                                           Hockey
-15                              Judo,Para judo,Lutte,Rugby fauteuil
-16                                Natation,Para natation,Water-polo
-17                              Canoë,Para canoë,Aviron,Para aviron
-18                                                Volleyball,Boccia
-19                                     Volleyball de plage,Cécifoot
-20                                                         BMX race
-21 Badminton,Para Badminton,Gymnastique rythmique,Para powerlifting
-22                                                         Goalball
-23                          Natation artistique,Plongeon,Water-polo
-24                                                                 
-25              Sports équestres,Para équitation,Pentathlon moderne
-26                                                                 
-27                                                  Para athlétisme
-28                                                              VTT
-29                Escrime,Escrime fauteuil,Taekwondo,Para taekwondo
-30       Tir à l'arc,Para tir à l'arc,Athlétisme,Cyclisme sur route
-31                                                Escalade sportive</code></pre>
+                                                         sports
+1                                                      Football
+2                              Athlétisme,Para athlétisme,Rugby
+3                                                          Golf
+4                    Cyclisme sur piste,Para cyclisme sur piste
+5                                   Tennis,Tennis fauteuil,Boxe
+6                                       Para cyclisme sur route
+7                          Tennis de table,Para tennis de table
+8                                                    Athlétisme
+9                                 Cyclisme sur route,Athlétisme
+10 Basketball,Basket fauteuil,Gymnastique artistique,trampoline</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data_ex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

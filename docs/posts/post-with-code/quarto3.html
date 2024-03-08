@@ -250,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-5" class="level4">
 <h4 class="anchored" data-anchor-id="question-5">Question 5</h4>
-<p>Créez deux nouvelles tables dans la base de données à l'aide de la fonction dbWriteTable. Les tables s'appeleront respectivement olympics_athletes et tokyo_athletes pour les fichiers olympics_athletes.json et tokyo_athletes.parquet.</p>
+<p>Créez deux nouvelles tables dans la base de données à l’aide de la fonction dbWriteTable. Les tables s’appeleront respectivement olympics_athletes et tokyo_athletes pour les fichiers olympics_athletes.json et tokyo_athletes.parquet.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbWriteTable</span>(connection,<span class="st">"tokyo_athletes"</span>,data_parquet)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -317,7 +317,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-9" class="level4">
 <h4 class="anchored" data-anchor-id="question-9">Question 9</h4>
-<p>Créez deux colonnes à partir de la colonne Games. La première colonne Year sera une colonne de type integer contenant l'année des jeux. La deuxième colonne isSummer sera une colonne booléenne qui indiquera si les jeux sont des jeux d'été ou d'hiver. Vous pourrez utiliser la fonction separate_wider_delim de tidyr notamment.</p>
+<p>Créez deux colonnes à partir de la colonne Games. La première colonne Year sera une colonne de type integer contenant l’année des jeux. La deuxième colonne isSummer sera une colonne booléenne qui indiquera si les jeux sont des jeux d’été ou d’hiver. Vous pourrez utiliser la fonction separate_wider_delim de tidyr notamment.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>base_oly_ath <span class="ot">&lt;-</span> base_oly_ath <span class="sc">|&gt;</span> <span class="fu">separate_wider_delim</span>(</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  Games,<span class="at">delim =</span> <span class="st">" "</span>,<span class="at">names =</span> <span class="fu">c</span>(<span class="st">"Year"</span>,<span class="st">"isSummer"</span>)</span>
@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-10" class="level4">
 <h4 class="anchored" data-anchor-id="question-10">Question 10</h4>
-<p>Calculez la moyenne d'age des athletes pour chacune des éditions des JO d'été. Quelle édition a compté les athlètes les plus jeunes ? Les plus vieux ?</p>
+<p>Calculez la moyenne d’age des athletes pour chacune des éditions des JO d’été. Quelle édition a compté les athlètes les plus jeunes ? Les plus vieux ?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>moyenne <span class="ot">&lt;-</span> base_oly_ath <span class="sc">|&gt;</span> <span class="fu">filter</span>(isSummer<span class="sc">==</span><span class="st">"Yes"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">|&gt;</span> <span class="fu">summarise</span>(</span>
@@ -360,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="question-11" class="level4">
 <h4 class="anchored" data-anchor-id="question-11">Question 11</h4>
-<p>Quelle est la discipline des JO d'été dont la taille des athlètes féminines est la plus grande ? Quelle a été cette discipline au cours de chacune des éditions ? Calculez le nombre de fois où chaque discipline a été la discipline avec les plus grandes athlètes.</p>
+<p>Quelle est la discipline des JO d’été dont la taille des athlètes féminines est la plus grande ? Quelle a été cette discipline au cours de chacune des éditions ? Calculez le nombre de fois où chaque discipline a été la discipline avec les plus grandes athlètes.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>base_oly_ath <span class="sc">|&gt;</span><span class="fu">filter</span>(isSummer<span class="sc">==</span><span class="st">"Yes"</span>) <span class="sc">|&gt;</span> </span>
@@ -426,14 +426,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="stringr-lubridate" class="level2">
 <h2 class="anchored" data-anchor-id="stringr-lubridate">stringr, lubridate</h2>
-<section id="question-12" class="level4">
-<h4 class="anchored" data-anchor-id="question-12">Question 12</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>texte <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">"Les jeux olympiques d’été se déroulent normalement tous les 4 ans, durant les mois</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="st"> de Juillet et Août. Les jeux de Rio ont eu lieu du 5 Août 2016 au 20 Août 2016,</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="st"> ceux de Tokyo du 23 Juillet 2021 au 8 Août 2021, et ceux de Paris auront lieu du</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="st"> 26 Juillet 2024 au 11 Août 2024. Plus de 10000 athlètes sont attendus du monde</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="st"> entier à Paris."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="question-12" class="level4">
+<h4 class="anchored" data-anchor-id="question-12">Question 12</h4>
+<p>En utilisant les fonctions du packages stringr, extrayez les dates des différentes éditions des JO. Aide : définissez une expression régulière capable de capturer une séquence de caractères représentant une date telle que “26 Juillet 2024”. Vous pourrez utiliser cette regex avec la fonction str_extract_all par exemple.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pattern <span class="ot">&lt;-</span> <span class="st">"</span><span class="sc">\\</span><span class="st">b</span><span class="sc">\\</span><span class="st">d{1,2} [A-Za-zéû]+ </span><span class="sc">\\</span><span class="st">d{4}</span><span class="sc">\\</span><span class="st">b"</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>les_dates <span class="ot">&lt;-</span> <span class="fu">str_extract_all</span>(texte, pattern)[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-13" class="level4">
+<h4 class="anchored" data-anchor-id="question-13">Question 13</h4>
+<p>Remplacez les noms des mois par leur numéro pour rendre ces éléments convertibles en date en utilisant la fonction str_replace.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>mois_numero <span class="ot">&lt;-</span> <span class="cf">function</span>(mois) {</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  mois <span class="ot">&lt;-</span> <span class="fu">tolower</span>(mois)  </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  mois_num <span class="ot">&lt;-</span> <span class="cf">switch</span>(mois,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"janvier"</span> <span class="ot">=</span> <span class="st">"01"</span>,</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"février"</span> <span class="ot">=</span> <span class="st">"02"</span>,</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"mars"</span> <span class="ot">=</span> <span class="st">"03"</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"avril"</span> <span class="ot">=</span> <span class="st">"04"</span>,</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"mai"</span> <span class="ot">=</span> <span class="st">"05"</span>,</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"juin"</span> <span class="ot">=</span> <span class="st">"06"</span>,</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"juillet"</span> <span class="ot">=</span> <span class="st">"07"</span>,</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"août"</span> <span class="ot">=</span> <span class="st">"08"</span>,</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"septembre"</span> <span class="ot">=</span> <span class="st">"09"</span>,</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"octobre"</span> <span class="ot">=</span> <span class="st">"10"</span>,</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"novembre"</span> <span class="ot">=</span> <span class="st">"11"</span>,</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"décembre"</span> <span class="ot">=</span> <span class="st">"12"</span>)  </span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(mois_num)</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>dates_numerique <span class="ot">&lt;-</span> <span class="fu">str_replace_all</span>(les_dates, <span class="st">"</span><span class="sc">\\</span><span class="st">b[A-Za-zéû]+</span><span class="sc">\\</span><span class="st">b"</span>, mois_numero)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="question-14" class="level4">
+<h4 class="anchored" data-anchor-id="question-14">Question 14</h4>
+<p>Convertissez ces 3 éléments en date en utilisant la fonction appropriée du package lubridate.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dates_num_en_date <span class="ot">&lt;-</span> <span class="fu">dmy</span>(dates_numerique)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dates_num_en_date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Date"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dates_num_en_date</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2016-08-05" "2016-08-20" "2021-07-23" "2021-08-08" "2024-07-26"
+[6] "2024-08-11"</code></pre>
+</div>
+</div>
+</section>
+<section id="question-15" class="level4">
+<h4 class="anchored" data-anchor-id="question-15">Question 15</h4>
+<p>Combien de jours ont séparés les éditions de Rio et Tokyo ? Et sépareront les éditions de Tokyo et de Paris ? Faites le même calcul en semaines.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rio: 5 Août 2016 au 20 Août 2016 et tokyo:23 Juillet 2021 au 8 Août 2021</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># paris: 26 Juillet 2024</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>rio_debut <span class="ot">&lt;-</span><span class="fu">dmy</span>(<span class="st">"5 Août 2016"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>rio_fin <span class="ot">&lt;-</span> <span class="fu">dmy</span>(<span class="st">"20 Août 2016"</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>tokyo_debut <span class="ot">&lt;-</span> <span class="fu">dmy</span>(<span class="st">"23 Juillet 2021"</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>tokyo_fin <span class="ot">&lt;-</span><span class="fu">dmy</span>(<span class="st">"8 Août 2021"</span>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>paris_debut <span class="ot">&lt;-</span><span class="fu">dmy</span>(<span class="st">"26 Juillet 2024"</span>)</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ecart </span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># rio tokyo</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="fu">difftime</span>(tokyo_debut,rio_fin,<span class="at">units =</span> <span class="fu">c</span>(<span class="st">"days"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 1798 days</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tokyo paris</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">difftime</span>(paris_debut,tokyo_fin,<span class="at">units =</span> <span class="fu">c</span>(<span class="st">"days"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 1083 days</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#en semaines</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co"># rio tokyo</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">difftime</span>(tokyo_debut,rio_fin,<span class="at">units =</span> <span class="fu">c</span>(<span class="st">"weeks"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 256.8571 weeks</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># tokyo paris</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">difftime</span>(paris_debut,tokyo_fin,<span class="at">units =</span> <span class="fu">c</span>(<span class="st">"weeks"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 154.7143 weeks</code></pre>
+</div>
 </div>
 
 
