@@ -204,7 +204,7 @@ barycentre <- df |>
 library(tidygeocoder)
 
 barycentre |> 
-  reverse_geocode(lat = latitude,long = longitude)
+  tidygeocoder::reverse_geocode(lat = latitude,long = longitude)
 
 ```
 
