@@ -1,7 +1,7 @@
 ---
 title: "Package usage"
 author: "Niamiti Bethel TOUMAN"
-date: "Mars 2024"
+date: "7 March 2024"
 categories: [package]
 ---
 
@@ -30,18 +30,18 @@ La fonction get_forecast du package "olympicsWeather" sera utilisée pour les pr
 ### Le stade de France
 
 ```{r warning=FALSE,message=FALSE}
-meteo_stade_de_france <-olympicsWeather::get_forecast("Stade de france")|> print(n=10)
+olympicsWeather::get_forecast("Stade de france")|> print(n=10)
 ```
 
 ### Tahiti
 
 ```{r warning=FALSE,message=FALSE}
-meteo_tahiti <-olympicsWeather::get_forecast("Tahiti") |> print(n=10)
+olympicsWeather::get_forecast("Tahiti") |> print(n=10)
 
 ```
 
 ### Coordonnées GPS 43.276703, 5.334791
 
 ```{r warning=FALSE,message=FALSE}
-meteo_gps <-olympicsWeather::get_forecast(c(43.276703,5.334791))|> print(n=10)
+olympicsWeather::get_forecast(c(43.276703,5.334791))|> print(n=10)
 ```

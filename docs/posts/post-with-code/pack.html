@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Niamiti Bethel TOUMAN">
-<meta name="dcterms.date" content="2024-03-01">
+<meta name="dcterms.date" content="2024-03-07">
 
 <title>QUARTO_BLOG - Package usage</title>
 <style>
@@ -167,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 1, 2024</p>
+      <p class="date">March 7, 2024</p>
     </div>
   </div>
   
@@ -197,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="le-stade-de-france" class="level3">
 <h3 class="anchored" data-anchor-id="le-stade-de-france">Le stade de France</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>meteo_stade_de_france <span class="ot">&lt;-</span>olympicsWeather<span class="sc">::</span><span class="fu">get_forecast</span>(<span class="st">"Stade de france"</span>)<span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>olympicsWeather<span class="sc">::</span><span class="fu">get_forecast</span>(<span class="st">"Stade de france"</span>)<span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 168 × 5
    date_heure temperature_celsius temperature_ressentie_ce…¹ precipitation_proba
@@ -221,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="tahiti" class="level3">
 <h3 class="anchored" data-anchor-id="tahiti">Tahiti</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>meteo_tahiti <span class="ot">&lt;-</span>olympicsWeather<span class="sc">::</span><span class="fu">get_forecast</span>(<span class="st">"Tahiti"</span>) <span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>olympicsWeather<span class="sc">::</span><span class="fu">get_forecast</span>(<span class="st">"Tahiti"</span>) <span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 168 × 5
    date_heure temperature_celsius temperature_ressentie_ce…¹ precipitation_proba
@@ -245,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="coordonnées-gps-43.276703-5.334791" class="level3">
 <h3 class="anchored" data-anchor-id="coordonnées-gps-43.276703-5.334791">Coordonnées GPS 43.276703, 5.334791</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>meteo_gps <span class="ot">&lt;-</span>olympicsWeather<span class="sc">::</span><span class="fu">get_forecast</span>(<span class="fu">c</span>(<span class="fl">43.276703</span>,<span class="fl">5.334791</span>))<span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>olympicsWeather<span class="sc">::</span><span class="fu">get_forecast</span>(<span class="fu">c</span>(<span class="fl">43.276703</span>,<span class="fl">5.334791</span>))<span class="sc">|&gt;</span> <span class="fu">print</span>(<span class="at">n=</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 168 × 5
    date_heure temperature_celsius temperature_ressentie_ce…¹ precipitation_proba

@@ -1,7 +1,7 @@
 ---
 title: "TD3"
 author: "Niamiti Bethel TOUMAN"
-date: "Mars 2024"
+date: "10 March 2024"
 categories: [travaux dirigés]
 ---
 
@@ -171,7 +171,13 @@ base_oly_ath |>filter(isSummer=="Yes") |>
 base_oly_ath |>filter(isSummer=="Yes") |> 
   filter(Sex=="F") |> group_by(Year) |> 
   filter(Height==max(Height,na.rm = TRUE)) |> select(Year, Sport) |>
-  arrange(Year) |> print(n=50)
+  arrange(Year) |> print(n=50) 
+
+tab <-base_oly_ath |>filter(isSummer=="Yes") |> 
+  filter(Sex=="F") |> group_by(Year) |> 
+  filter(Height==max(Height,na.rm = TRUE)) |> select(Year, Sport) |>
+  arrange(Year) 
+tab |> group_by(Sport)|> summarize(occurrence=n()) |> arrange(desc(occurrence))
 ```
 
 ## stringr, lubridate

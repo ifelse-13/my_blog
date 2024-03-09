@@ -1,10 +1,12 @@
 ---
 title: "Bienvenue sur mon blog"
 author: "Niamiti TOUMAN"
-date: "Mars 2024"
-categories: [analysis, code, news, package, travaux dirigés]
+date: "27 February 2024"
+categories: [accueil, news, package, travaux dirigés]
 ---
 
 Bienvenue sur la page Blog Quarto de mon repertoire Github.
+
+Ce Blog est destiné à la publication des travaux dirigés réalisés dans le cadre de mon cours de R avancé et introduction à github et de ma librairie OlympicsWeather.
 
 ![](thumbnail.jpg){width="226"}

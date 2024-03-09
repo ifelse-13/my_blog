@@ -1,7 +1,7 @@
 ---
 title: "TD1"
 author: "Niamiti Bethel TOUMAN"
-date: "Mars 2024"
+date: "8 March 2024"
 categories: [travaux dirigés]
 ---
 
