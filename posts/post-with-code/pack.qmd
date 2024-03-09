@@ -30,18 +30,21 @@ La fonction get_forecast du package "olympicsWeather" sera utilisée pour les pr
 ### Le stade de France
 
 ```{r warning=FALSE,message=FALSE}
-olympicsWeather::get_forecast("Stade de france")|> print(n=10)
+france<-olympicsWeather::get_forecast("Stade de france")|> as.data.frame() 
+france |> head(2)
 ```
 
 ### Tahiti
 
 ```{r warning=FALSE,message=FALSE}
-olympicsWeather::get_forecast("Tahiti") |> print(n=10)
+tahiti<-olympicsWeather::get_forecast("Tahiti") |>as.data.frame() 
+tahiti |> head(2)
 
 ```
 
 ### Coordonnées GPS 43.276703, 5.334791
 
 ```{r warning=FALSE,message=FALSE}
-olympicsWeather::get_forecast(c(43.276703,5.334791))|> print(n=10)
+coord<-olympicsWeather::get_forecast(c(43.276703,5.334791))|>as.data.frame()
+coord |>head(2)
 ```
