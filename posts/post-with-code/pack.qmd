@@ -48,3 +48,92 @@ tahiti |> head(2)
 coord<-olympicsWeather::get_forecast(c(43.276703,5.334791))|>as.data.frame()
 coord |>head(2)
 ```
+
+## Visualisation des previsions 
+
+Pour la visualisation des prévisions j'ai developpé une application Shiny dans le but de selectionner certains niveau d'affichage pour les valeurs de températures, précipitation et des probabilités de précipitation.
+
+Etant donné que ce Blog est un site statique, l'application ne se chargera pas.
+
+Je vous laisse le code de la fonction visualization_forecast qui permet de convertir les données obtenues dans un get_forecast en des graphiques présentés dans une application R-Shiny.
+
+Vous pouvez lancer les differentes lignes de code suivante pour un apperçu.
+
+```{r}
+library(shiny)
+  library(ggplot2)
+  library(shinythemes) 
+  library(olympicsWeather)
+```
+
+```{r}
+visualization_forecast <- function(localisation){
+  
+  # donnees pour la visualisation
+  donnees_meteo <- get_forecast(localisation)
+  donnees_meteo=as.data.frame(donnees_meteo)
+  donnees_meteo[,2:5]<- sapply(donnees_meteo[,2:5],as.integer)
+  donnees_meteo[,1]<-as.Date(unlist(donnees_meteo[,1]))
+  
+  ###
+  dates <- donnees_meteo$date_heure
+  temperature <- donnees_meteo$temperature_celsius
+  temperature_ressentie <- donnees_meteo$temperature_ressentie_celsius
+  precipitation <- donnees_meteo$precipitation
+  prob_precipitation <- donnees_meteo$precipitation_proba
+  ###
+  
+  # Interface utilisateur
+  ui <- fluidPage(
+    theme = shinytheme("flatly"),
+    titlePanel("Météo"),
+    sidebarLayout(
+      sidebarPanel(
+        sliderInput("temperature", "Température", min = 0, max = 40, value = c(0, 40)),
+        sliderInput("precipitation", "Précipitation", min = 0, max = 10, value = c(0, 10)),
+        sliderInput("prob_precipitation", "Probabilité de Précipitation", min = 0, max = 100, value = c(0, 100))
+      ),
+      mainPanel(
+        plotOutput("weatherPlot")
+      )
+    )
+  )
+  
+  # Server
+  server <- function(input, output) {
+    filtered_data <- reactive({
+      subset_data <- subset(
+        data.frame(date = dates, temperature = temperature, precipitation = precipitation, prob_precipitation = prob_precipitation),
+        temperature >= input$temperature[1] & temperature <= input$temperature[2] &
+          precipitation >= input$precipitation[1] & precipitation <= input$precipitation[2] &
+          prob_precipitation >= input$prob_precipitation[1] & prob_precipitation <= input$prob_precipitation[2]
+      )
+      return(subset_data)
+    })
+    
+    output$weatherPlot <- renderPlot({
+      ggplot(filtered_data(), aes(x = date, y = temperature, color = precipitation, size = prob_precipitation)) +
+        geom_point() +
+        labs(title = "Graphique Météo",
+             x = "Date",
+             y = "Température",
+             color = "Précipitation",
+             size = "Probabilité de Précipitation")+
+        theme_minimal() +  
+        theme(
+          plot.background = element_rect(fill = "#CCE5FF"),  
+          panel.grid.major = element_line(color = "#99C2FF"), 
+          panel.grid.minor = element_line(color = "#B3D9FF"),  
+          axis.text = element_text(color = "#333333"),  
+          axis.title = element_text(color = "#333333", size = 12, face = "bold") 
+        )
+      
+    })
+  }
+  
+  shinyApp(ui, server)
+  
+}
+
+visualization_forecast(c(67,4))
+```

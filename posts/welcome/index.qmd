@@ -1,6 +1,6 @@
 ---
 title: "Bienvenue sur mon blog"
-author: "Niamiti TOUMAN"
+author: "Niamiti Bethel TOUMAN"
 date: "27 February 2024"
 categories: [accueil, news, package, travaux dirigés]
 ---
